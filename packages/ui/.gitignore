@@ -1,0 +1,6 @@
+/.idea/
+/bak/
+dist/
+public/schema/
+node_modules/
+*.local

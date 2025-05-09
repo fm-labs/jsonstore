@@ -1,0 +1,18 @@
+@use "glyphicons.scss";
+
+form.rjsf {
+
+  fieldset .rjsf-field {
+    margin-bottom: 1rem;
+
+    .control-label {
+      font-weight: bold;
+    }
+
+    .field-description {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+

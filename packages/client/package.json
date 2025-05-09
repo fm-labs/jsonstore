@@ -1,0 +1,33 @@
+{
+  "name": "@jsonstore/client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/jsonstore-client.cjs.js",
+  "module": "dist/jsonstore-client.es.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/jsonstore-client.es.js",
+      "require": "./dist/jsonstore-client.cjs.js"
+    }
+  },
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "axios": "^1.6.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src/ --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint src/ --fix --report-unused-disable-directives --max-warnings 0",
+    "lint:dump": "eslint src/ --max-warnings 0 --format=checkstyle > eslint-report.xml",
+    "test": "jest"
+  }
+}

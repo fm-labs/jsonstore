@@ -1,0 +1,34 @@
+{
+  "name": "@jsonstore/server",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "type": "module",
+  "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^12.0.1",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongoose": "^8.14.1",
+    "morgan": "^1.10.0"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/mongoose": "^5.11.97",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.15.13",
+    "ts-node": "^10.9.2",
+    "tsc-watch": "^6.2.1"
+  },
+  "scripts": {
+    "dev": "tsc-watch --onSuccess \"node ./dist/index.js\"",
+    "build": "tsc",
+    "lint": "eslint src/ --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint src/ --fix --report-unused-disable-directives --max-warnings 0",
+    "lint:dump": "eslint src/ --max-warnings 0 --format=checkstyle > eslint-report.xml",
+    "start": "tsc && ts-node src/index.ts",
+    "init": "tsc && ts-node src/init.ts"
+  }
+}
