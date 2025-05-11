@@ -16,9 +16,11 @@ help:
 	@echo "  packages           Build Node.js packages using lerna"
 	@echo "  image          	Build Docker images (base and local)"
 	@echo "  run            	Run the local Docker container"
-	@echo "  dev-stack-up       Start the dev Docker Compose stack"
-	@echo "  dev-stack-down     Stop the dev Docker Compose stack"
 
+packages:
+	@echo "Building Node.js packages ..."
+	yarn install
+	yarn run build
 
 image:
 	@echo "Building docker image ..."
@@ -28,5 +30,5 @@ image:
 run:
 	@echo "Running docker container ..."
 	docker run -it --rm \
-	  -v $(PWD):/jsonstore \
+	  -v $(PWD)/data:/app/data \
 	  $(IMAGE):$(TAG)
