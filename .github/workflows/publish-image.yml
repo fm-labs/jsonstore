@@ -46,6 +46,14 @@ jobs:
         #echo "major_minor=$(echo $version | cut -d. -f1,2)" >> $GITHUB_OUTPUT
         #echo "major=$(echo $version | cut -d. -f1)" >> $GITHUB_OUTPUT
 
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
       - name: Build, tag, and push image to Docker Hub
         uses: docker/build-push-action@v6
         with:
@@ -56,10 +64,15 @@ jobs:
           tags: |
             ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_REPONAME }}:${{ steps.vars.outputs.version }}
             ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_REPONAME }}:latest
-          # Caching
-          #cache-from: type=gha
-          #cache-to: type=gha,mode=max`
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
 
+      - name: Move new cache into place
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
 #    - name: Build, tag, and push image to Docker Hub
 #      id: build-image
